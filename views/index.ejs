@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>100 Checkboxes</title>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 Checkboxes</title>
+</head>
+<body>
+  <nav>
+    <% if (!user) { %>
+      <a class="button google" href="/login">Sign in</a>
+    <% } else { %>
+      <a class="button google" href="/logout">Sign out</a>
+    <% } %>
+  </nav>
+
+  <% if (user) { %>
     <div id="checkboxes-container">
       <% for (let i = 0; i < 100; i++) { %>
-      <input type="checkbox" id="checkbox-<%= i %>" class="checkbox" />
-      <% if ((i + 1) % 10 === 0) { %><br /><% } %> <% } %>
+        <input type="checkbox" id="checkbox-<%= i %>" class="checkbox" />
+        <% if ((i + 1) % 10 === 0) { %><br /><% } %>
+      <% } %>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/script.js"></script>
-  </body>
+  <% } else { %>
+    <p>Please sign in to view and interact with the checkboxes.</p>
+  <% } %>
+</body>
 </html>
